@@ -1858,6 +1858,34 @@ static int _speed_ui(void)
     }
 }
 
+cptr _birth_kit_text[BIRTH_KIT_MAX] = {
+ "Healthy Living",
+ "Mobility Version",
+ "Vision Plan",
+ "Hard Times"
+};
+
+static int _kit_ui(void)
+{
+    for (;;)
+    {
+        doc_clear(_doc);
+        _race_class_top(_doc);
+
+        doc_insert(_doc, "<color:G>Choose Kit</color>\n");
+        for (i = 0; i < BIRTH_KIT_MAX; i++)
+        {
+            doc_printf(_doc, "  <color:y>%c</color>) <color:%c>%s</color>\n", I2A(i), birth_kit == i ? 'B' : 'w', _birth_kit_text[i]);
+        }
+
+         _sync_term(_doc);
+        cmd = _inkey();
+        if (cmd == '\t') _inc_rcp_state();
+        else if (cmd == '=') _birth_options();
+        else if (cmd == ESCAPE) return UI_CANCEL;
+    }
+}
+
 /************************************************************************
  * 2.3.2) Magic
  ***********************************************************************/ 
