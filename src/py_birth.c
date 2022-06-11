@@ -200,8 +200,11 @@ void py_birth_spellbooks(void)
 }
 
 /* Starting Kit. Note it would be nice to integrate this into the birth process more completely. *
- * With a budget that represents available gold (less about 50 AU in change,) subtly randomize *
- * each tailored kit to the character. As of right now there are no big surprises, but could be */
+ * With a budget that represents available gold (less about 20-40 AU in change,) subtly randomize *
+ * each tailored kit to the character. As of right now there are no big surprises, but some could *
+ * be added for flavor. */
+
+/* TODO decide if these items should be flagged as discounted */
 
 void py_birth_starting_kit() 
 {
@@ -211,28 +214,34 @@ void py_birth_starting_kit()
 
     printf("not null\n");
 
-
-    // Otherwise, we have a kit. First set the budget. (Check gold? Worry about wealthy chars? Would be better)
+    /* We have a starting kit. First set the budget by using almost but not quite all of the AU. */
     int budget = p_ptr->au;
+    budget = floor(budget*19/20) - 20;
+    /* So far the rand_ranges in the kits are only cursorily using budget. It could be improved significantly *
+    * so that more of one thing would lead to less of another. */
+    int millibudget = (budget/1000);
     printf("budget %d\n", budget);
+    
     switch(starting_kit)
     {
+    /* Healthy Living */
     case 1:
         printf("case 1\n");
-
-        // CLW or Elvish?
-        switch(randint1(2)) 
+        bool elvish_else_clw = magik(30);
+        bool tele_else_phasedoor = magik(50);
+        printf ("elvish %hhd tele %hhd", elvish_else_clw, tele_else_phasedoor);
+        if (elvish_else_clw)
         {
-            case 1: /*CLW*/ py_birth_obj_aux(TV_POTION, SV_POTION_CURE_LIGHT, 1 + rand_range(0, 3)); break;
-            case 2: /*Elvish*/ py_birth_obj_aux(TV_FOOD, SV_FOOD_WAYBREAD, 1 + rand_range(0, 1)); break;
+            py_birth_obj_aux(TV_FOOD, SV_FOOD_WAYBREAD, 1 + rand_range(0, round(millibudget*3)));
+        } else {
+            py_birth_obj_aux(TV_POTION, SV_POTION_CURE_LIGHT, 1 + rand_range(0, round(millibudget*5)));
         }
-        py_birth_obj_aux(TV_POTION, SV_POTION_CURE_SERIOUS, 1 + rand_range(0, 1));
-        py_birth_obj_aux(TV_POTION, SV_POTION_CURING, 1 + rand_range(0, 1));
-        // Phase or Tele?
-        switch(randint1(2)) 
-        {
-            case 1: py_birth_obj_aux(TV_SCROLL, SV_SCROLL_PHASE_DOOR, 2 + rand_range(0, 1)); break;
-            case 2: py_birth_obj_aux(TV_SCROLL, SV_SCROLL_TELEPORT, 1 + rand_range(0, 1)); break;
+        py_birth_obj_aux(TV_POTION, SV_POTION_CURE_SERIOUS, 1 + rand_range(0, round(millibudget*2)));
+        py_birth_obj_aux(TV_POTION, SV_POTION_CURING, 1 + rand_range(0, round(millibudget)));
+        if (tele_else_phasedoor) {
+            py_birth_obj_aux(TV_SCROLL, SV_SCROLL_TELEPORT, 1 + rand_range(0, round(millibudget)));
+        } else {
+            py_birth_obj_aux(TV_SCROLL, SV_SCROLL_PHASE_DOOR, 2 + rand_range(0, round(millibudget*3)));
         }
         break;
     }
@@ -250,6 +259,7 @@ void py_birth_starting_kit()
     // 10 !booze? Spikes? Useful stuff?    
 
     //don't forget to remove gold to account for starting kit cost
+    p_ptr->au -= budget;
 
     // NONE 
     // do nothing (?) */
