@@ -260,3 +260,7 @@ config.log
 config.status
 mk/buildsys.mk
 src/autoconf.h.in
+
+# My hacks
+# Ignore auto-updated configure for now
+configure
