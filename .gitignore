@@ -264,5 +264,5 @@ src/autoconf.h.in
 # My hacks
 # Ignore auto-updated configure for now
 configure
-/lib/help/html/*
-/lib/help/text/*
+lib/help/html/*.*
+lib/help/text/*.*
