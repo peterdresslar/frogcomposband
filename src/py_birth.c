@@ -51,6 +51,7 @@ extern int py_birth(void);
                     static int _mon_troll_ui(void);
                     static int _mon_orc_ui(void);
         static int _speed_ui(void);
+        static int _starting_kit_ui(void);
     static int _stats_ui(void);
 
 extern void py_birth_obj(object_type *o_ptr);
@@ -641,6 +642,7 @@ static int _race_class_ui(void)
                 doc_insert(cols[0], "  <color:y>m</color>) Change Magic\n");
         }
         if (game_mode != GAME_MODE_BEGINNER) doc_insert(cols[0], "  <color:y>g</color>) Change Game Speed\n");
+        if (game_mode != GAME_MODE_BEGINNER) doc_insert(cols[0], "  <color:y>k</color>) Change Starting Kit\n");
 
         doc_insert(cols[1], "<color:y>  *</color>) Random Name\n");
         doc_insert(cols[1], "<color:y>  ?</color>) Help\n");
@@ -714,6 +716,15 @@ static int _race_class_ui(void)
             if (game_mode != GAME_MODE_BEGINNER)
                 doc_display_help("speed.txt", NULL);
             break;
+        case 'k':
+            if (game_mode != GAME_MODE_BEGINNER)
+                _starting_kit_ui();
+            break;
+        case 'K':
+            if (game_mode != GAME_MODE_BEGINNER)
+                doc_display_help("starting_kit.txt", NULL);
+            break;
+
         case 'r':
             if (game_mode == GAME_MODE_BEGINNER)
                 _race_ui(_beginner_races);
@@ -1858,31 +1869,54 @@ static int _speed_ui(void)
     }
 }
 
-cptr _birth_kit_text[BIRTH_KIT_MAX] = {
+cptr _starting_kit_text[STARTING_KIT_MAX] = {
  "Healthy Living",
  "Mobility Version",
  "Vision Plan",
- "Hard Times"
+ "Hard Times",
+ "None"
 };
 
-static int _kit_ui(void)
+static int _starting_kit_ui(void)
 {
     for (;;)
     {
+        int i, cmd;
         doc_clear(_doc);
         _race_class_top(_doc);
 
         doc_insert(_doc, "<color:G>Choose Kit</color>\n");
-        for (i = 0; i < BIRTH_KIT_MAX; i++)
+        for (i = 0; i < STARTING_KIT_MAX; i++)
         {
-            doc_printf(_doc, "  <color:y>%c</color>) <color:%c>%s</color>\n", I2A(i), birth_kit == i ? 'B' : 'w', _birth_kit_text[i]);
+            doc_printf(_doc, "  <color:y>%c</color>) <color:%c>%s</color>\n", I2A(i), starting_kit == i ? 'B' : 'w', _starting_kit_text[i]);
         }
 
-         _sync_term(_doc);
+               _sync_term(_doc);
         cmd = _inkey();
         if (cmd == '\t') _inc_rcp_state();
         else if (cmd == '=') _birth_options();
         else if (cmd == ESCAPE) return UI_CANCEL;
+        else if (isupper(cmd))
+        {
+            i = A2I(tolower(cmd));
+            if (0 <= i && i < STARTING_KIT_MAX)
+            {
+                char nimi[30];
+                strcpy(nimi, "starting_kit.txt#");
+                strcat(nimi, _starting_kit_text[i]);
+                do {} while (clip_and_locate(" ", nimi));
+                doc_display_help(nimi, NULL);
+            }
+        }
+        else
+        {
+            i = A2I(cmd);
+            if (0 <= i && i < STARTING_KIT_MAX)
+            {
+                starting_kit = i;
+                return UI_OK;
+            }
+        }
     }
 }
 

@@ -352,6 +352,7 @@ bool alert_poison;   /* Alert on high poisoning */
 /*** Birth Options ***/
 
 byte coffee_break;   /* Coffee-break mode */
+byte starting_kit;   /* Selected Starting Kit */
 bool easy_id;        /* Easy Identify */
 bool easy_lore;      /* Easy Monster Lore */
 bool empty_lore;     /* Always start with empty item lore */

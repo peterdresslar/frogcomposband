@@ -33,6 +33,13 @@
 #define SPEED_INSTA_COFFEE  2
 #define GAME_SPEED_MAX      3
 
+#define STARTING_KIT_HEALTH    0
+#define STARTING_KIT_MOVEMENT  1
+#define STARTING_KIT_LIGHT     2
+#define STARTING_KIT_HARD      3
+#define STARTING_KIT_NONE      4
+#define STARTING_KIT_MAX       5
+
 /*
  * Number of grids in each block (vertically)
  * Probably hard-coded to 11, see "generate.c"

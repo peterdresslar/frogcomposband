@@ -384,6 +384,7 @@ extern bool alert_poison;       /* Alert on poisoning */
 /*** Birth Options ***/
 
 extern byte coffee_break;   /* Coffeebreak mode */
+extern byte starting_kit;   /* Starting kit choice */
 extern bool easy_id;        /* Easy Identify */
 extern bool easy_lore;      /* Easy Monster Lore */
 extern bool empty_lore;     /* Always start with empty item lore */

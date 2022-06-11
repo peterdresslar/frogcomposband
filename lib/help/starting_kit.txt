@@ -1,0 +1,36 @@
+<style:title>Starting Kits</style>
+
+FrogComposband offers several different starting kits for good reasons.
+
+<topic:Healthy Living><style:heading>Healthy Living</style>
+
+The Healthy Living starting kit includes a few modest, well-selected items designed to keep you alive a few moves farther into the dungeon or out in the wildnerness. Don't leave home without it!
+<topic:Mobility Version><style:heading>Mobility (full game)</style>
+
+This is the traditional game speed, and the one that offers the most complete game. In a full game of FrogComposband, you will fight thousands of monsters, complete dozens of quests, explore more than 30 dungeons and eagerly inspect thousands of (potentially) magical objects. It is possible to play in Normal Mode with the special coffee-break town and no wilderness, but this is strongly not recommended.
+
+A complete game in normal-speed mode typically lasts between 15 and 150 hours. The speedrun record for a full-game win is 4 hours and 6 minutes.
+
+<topic:Vision Plan><style:heading>Vision (fast)</style>
+
+<color:U>Coffee-break mode</color> offers an accelerated game, with fewer quests, only one dungeon (Angband), one town (a special version of Outpost) and no wilderness. Every level you explore will be deeper than the one before; the only staircases are downshafts that take you down two levels at a time. You are allowed to return to the town by Word of Recall.
+
+Experience gain from killing monsters in the dungeon is much faster in coffee-break mode (experience gain outside the dungeon is not accelerated). The quality and quantity of monster item drops are also both increased; and most forms of proficiency gain are accelerated. In coffee-break mode, you get stronger faster, but also start running into dangerous monsters more rapidly.
+
+Coffee-break mode uses a special level-size generation algorithm; in general, levels tend to be very small in the early game and become larger as the endgame approaches.
+
+Selecting <color:keyword>Beginner Mode</color> automatically turns coffee-break mode on, but it is not necessarily easier than normal mode and not intended exclusively for new players.
+
+A complete game in coffee-break mode typically lasts between 5 and 50 hours.
+
+<topic:Hard Times><style:heading>Har dTimes</style>
+
+<color:U>Hard Times</color> means booze
+
+<topic:None><style:heading>No Starting Kit</style>
+
+<color:U></color> I will keep my gold, thanks.
+
+<color:D>
+Original   : FrogComposband 7.1.salmiak
+</color>

@@ -1526,6 +1526,7 @@ struct birther
     byte realm1;       /* First magic realm */
     byte realm2;       /* Second magic realm */
     byte dragon_realm;
+    byte starting_kit;
 
 s16b age;
 s16b ht;

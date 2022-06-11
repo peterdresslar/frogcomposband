@@ -13,6 +13,7 @@ Please choose one of the following help topics:
     <link:birth.txt#BirthOptions> Birth Options
     <link:birth.txt#Reference> Reference
     <link:speed.txt> Game Speed Modes
+    <link:starting_kit.txt> Starting Kits
 
     <color:y>(?) Help System Commands</color>
 

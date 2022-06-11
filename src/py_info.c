@@ -2506,6 +2506,14 @@ static cptr _game_speed_text[GAME_SPEED_MAX] = {
     "<color:U>Instant Coffee</color>"
 };
 
+static cptr _starting_kit_text[STARTING_KIT_MAX] = {
+    "Healthy Living",
+    "Mobility Version",
+    "Vision Plan",
+    "Hard Times",
+    "<color:r>No Kit, I'll Keep My Gold</color>"
+};
+
 static void _build_options(doc_ptr doc)
 {
     int i, loydetty = 0;
