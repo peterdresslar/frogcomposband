@@ -2509,8 +2509,9 @@ static cptr _game_speed_text[GAME_SPEED_MAX] = {
 static cptr _starting_kit_text[STARTING_KIT_MAX] = {
     "None",
     "Healthy Living",
-    "Mobility Version",
+    "Mobility Edition",
     "Vision Plan",
+    "Adventurers Choice",
     "Hard Times"
 };
 

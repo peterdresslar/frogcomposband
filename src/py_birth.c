@@ -206,63 +206,157 @@ void py_birth_spellbooks(void)
 
 /* TODO decide if these items should be flagged as discounted */
 
-void py_birth_starting_kit() 
+void py_birth_starting_kit()
 {
     printf("starting %hhu\n", starting_kit);
 
-    if (!starting_kit) return;
+    if (!starting_kit)
+        return;
 
     printf("not null\n");
 
     /* We have a starting kit. First set the budget by using almost but not quite all of the AU. */
     int budget = p_ptr->au;
-    budget = floor(budget*19/20) - 20;
+    budget = floor(budget * 19 / 20) - 20;
     /* So far the rand_ranges in the kits are only cursorily using budget. It could be improved significantly *
-    * so that more of one thing would lead to less of another. */
-    int millibudget = (budget/1000);
+     * so that more of one thing would lead to less of another. */
+    int millibudget = (budget / 1000);
     printf("budget %d\n", budget);
-    
-    switch(starting_kit)
+
+    switch (starting_kit)
     {
     /* Healthy Living */
+    /* I have a mobility scroll in here because I would want one, but maybe should not be? */
     case 1:
+    {
         printf("case 1\n");
         bool elvish_else_clw = magik(30);
         bool tele_else_phasedoor = magik(50);
-        printf ("elvish %hhd tele %hhd", elvish_else_clw, tele_else_phasedoor);
+        printf("elvish %hhd tele %hhd", elvish_else_clw, tele_else_phasedoor);
         if (elvish_else_clw)
         {
-            py_birth_obj_aux(TV_FOOD, SV_FOOD_WAYBREAD, 1 + rand_range(0, round(millibudget*3)));
-        } else {
-            py_birth_obj_aux(TV_POTION, SV_POTION_CURE_LIGHT, 1 + rand_range(0, round(millibudget*5)));
+            py_birth_obj_aux(TV_FOOD, SV_FOOD_WAYBREAD, 2 + rand_range(0, round(millibudget * 2)));
         }
-        py_birth_obj_aux(TV_POTION, SV_POTION_CURE_SERIOUS, 1 + rand_range(0, round(millibudget*2)));
-        py_birth_obj_aux(TV_POTION, SV_POTION_CURING, 1 + rand_range(0, round(millibudget)));
-        if (tele_else_phasedoor) {
-            py_birth_obj_aux(TV_SCROLL, SV_SCROLL_TELEPORT, 1 + rand_range(0, round(millibudget)));
-        } else {
-            py_birth_obj_aux(TV_SCROLL, SV_SCROLL_PHASE_DOOR, 2 + rand_range(0, round(millibudget*3)));
+        else
+        {
+            py_birth_obj_aux(TV_POTION, SV_POTION_CURE_LIGHT, 2 + rand_range(0, round(millibudget * 4)));
+        }
+        py_birth_obj_aux(TV_POTION, SV_POTION_CURE_SERIOUS, 2 + rand_range(0, round(millibudget * 2)));
+        py_birth_obj_aux(TV_POTION, SV_POTION_CURING, 1 + rand_range(0, round(millibudget * 1)));
+        py_birth_obj_aux(TV_FOOD, SV_FOOD_FAST_RECOVERY, 0 + rand_range(0, round(millibudget * 1)));
+        if (tele_else_phasedoor)
+        {
+            py_birth_obj_aux(TV_SCROLL, SV_SCROLL_TELEPORT, 1 + rand_range(0, round(millibudget * 1)));
+        }
+        else
+        {
+            py_birth_obj_aux(TV_SCROLL, SV_SCROLL_PHASE_DOOR, 2 + rand_range(0, round(millibudget * 3)));
         }
         break;
     }
+    /* Mobility Edition */
+    /* */
+    case 2:
+    {
+        printf("case 2\n");
+        bool tele_level = magik(20);
+        printf("tele level %hhd", tele_level);
+        if (tele_level)
+        {
+            py_birth_obj_aux(TV_SCROLL, SV_SCROLL_TELEPORT_LEVEL, 1);
+        }
+        py_birth_obj_aux(TV_POTION, SV_POTION_SPEED, 1 + rand_range(0, round(millibudget * 2)));
+        py_birth_obj_aux(TV_SCROLL, SV_SCROLL_TELEPORT, 3 + rand_range(0, round(millibudget * 3)));
+        py_birth_obj_aux(TV_SCROLL, SV_SCROLL_PHASE_DOOR, 5 + rand_range(0, round(millibudget * 6)));
+        break;
+    }
 
-    //* HEALTH
-    // 3-4 !CLW OR Elvish Waybread, 1-2 !CSW, Curing, ?Phasedoor or ?Tele
+    /* Vision Plan */
+    /* */
+    case 3:
+    {
+        printf("case 3\n");
+        bool phial_else_lantern = magik(5); /* 5 percent? */
+        printf("phial %hhd", phial_else_lantern);
+        if (phial_else_lantern)
+        {
+            if (!player_is_ninja)
+            {
+                object_type forge = {0};
+                object_prep(&forge, lookup_kind(TV_LITE, SV_LITE_GALADRIEL));
+                forge.number = 1;
+                py_birth_obj(&forge);
+            }
+        }
+        else
+        {
+            if (!player_is_ninja)
+            {
+                object_type forge = {0};
+                object_prep(&forge, lookup_kind(TV_LITE, SV_LITE_LANTERN));
+                forge.number = 1;
+                forge.xtra4 = FUEL_LAMP;
+                py_birth_obj(&forge);
+                py_birth_obj_aux(TV_FLASK, SV_FLASK_OIL, 4 + rand_range(0, round(millibudget * 6)));
+                py_birth_obj_aux(TV_SCROLL, SV_SCROLL_LIGHT, 2 + rand_range(0, round(millibudget * 6)));
+            } /* handle ninja? */
 
-    // MOVEMENT
-    // 5-6 ?Phasedoor, 1-3 ?Tele, 1 ?Recall, 1 !Speed
+            py_birth_obj_aux(TV_SCROLL, SV_SCROLL_DETECT_INVIS, 1 + rand_range(0, round(millibudget * 3)));
+            py_birth_obj_aux(TV_FOOD, SV_FOOD_CURE_BLINDNESS, 1 + rand_range(0, round(millibudget * 1)));
+            py_birth_obj_aux(TV_FOOD, SV_FOOD_CURE_CONFUSION, 0 + rand_range(0, round(millibudget * 1)));
+        }
+        break;
+    }
+    /* Adventurers Choice */
+    /* */
+    case 4:
+    {
+        printf("case 4\n");
+        /* would be nice to get rid of the torches */
+        if (!player_is_ninja)
+        {
+            object_type forge = {0};
+            object_prep(&forge, lookup_kind(TV_LITE, SV_LITE_LANTERN));
+            forge.number = 1;
+            forge.xtra4 = FUEL_LAMP;
+            py_birth_obj(&forge);
+            py_birth_obj_aux(TV_FLASK, SV_FLASK_OIL, 4 + rand_range(0, round(millibudget * 6)));
+        } /*else? handle ninja?*/
+        py_birth_obj_aux(TV_SCROLL, SV_SCROLL_TELEPORT, 2 + rand_range(0, round(millibudget * 2)));
+        py_birth_obj_aux(TV_SCROLL, SV_SCROLL_PHASE_DOOR, 2 + rand_range(0, round(millibudget * 4)));
+        py_birth_obj_aux(TV_FOOD, SV_FOOD_CURE_BLINDNESS, 0 + rand_range(0, round(millibudget * 1)));
+        py_birth_obj_aux(TV_FOOD, SV_FOOD_CURE_CONFUSION, 0 + rand_range(0, round(millibudget * 1)));
+        py_birth_obj_aux(TV_POTION, SV_POTION_CURE_SERIOUS, 2 + rand_range(0, round(millibudget * 2)));
+        py_birth_obj_aux(TV_POTION, SV_POTION_CURING, 1 + rand_range(0, round(millibudget * 2)));
+        break;
+    }
 
-    // LIGHT
-    // Brass Lantern, FlaskOil 2-3 ?Light, !Curing, 2-3 ?Phasedoor,  
+    /* Hard Times */
+    /* */
+    case 5:
+    {
+        printf("case 5\n");
+        bool tele_level = magik(20);
+        printf("tele level %hhd", tele_level);
+        py_birth_obj_aux(TV_POTION, SV_POTION_BOOZE, 3 + rand_range(0, round(millibudget * 8)));
+        py_birth_obj_aux(TV_POTION, SV_POTION_SLEEP, 1 + rand_range(0, round(millibudget * 3)));
+        py_birth_obj_aux(TV_SCROLL, SV_SCROLL_DARKNESS, 1 + rand_range(0, round(millibudget * 2)));
+        py_birth_obj_aux(TV_FOOD, SV_FOOD_SLIME_MOLD, 5 + rand_range(0, round(millibudget * 5)));
 
-    // HARD
-    // 10 !booze? Spikes? Useful stuff?    
-
-    //don't forget to remove gold to account for starting kit cost
+        /* Plus some kind of cursed broken dagger? Not great for a non-hands-having Adventurer. Needs work.*/
+        object_type forge;
+        object_prep(&forge, lookup_kind(TV_SWORD, SV_BROKEN_DAGGER));
+        add_flag(forge.flags, OF_THROWING);
+        forge.to_h = rand_range(0, round(millibudget * 8)) - 4;
+        forge.to_d = rand_range(1, round(millibudget * 8)) + 4;
+        forge.curse_flags |= OFC_CURSED;
+        py_birth_obj(&forge);
+        break;
+    }
+        /* End of the Switch cases */
+    }
+    /* Remove gold to account for starting kit cost */
     p_ptr->au -= budget;
-
-    // NONE 
-    // do nothing (?) */
 }
 
 /********************************************************************
@@ -1939,8 +2033,9 @@ static int _speed_ui(void)
 cptr _starting_kit_text[STARTING_KIT_MAX] = {
  "None",
  "Healthy Living",
- "Mobility Version",
+ "Mobility Edition",
  "Vision Plan",
+ "Adventurers Choice",
  "Hard Times"
 };
 
