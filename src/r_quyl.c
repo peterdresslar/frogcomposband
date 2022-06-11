@@ -895,6 +895,7 @@ static void _birth(void)
 
     py_birth_food();
     py_birth_light();
+    py_birth_starting_kit();
 }
 
 static void _gain_level(int new_level) 

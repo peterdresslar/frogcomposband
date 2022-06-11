@@ -2797,6 +2797,7 @@ void _on_birth(void)
     weaponmaster_adjust_skills();
 
     py_birth_obj_aux(TV_SOFT_ARMOR, SV_LEATHER_JACK, 1);
+    py_birth_starting_kit();
 }
 
 static void _set_max_skill(int tval, int skill)

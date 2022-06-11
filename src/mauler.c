@@ -671,6 +671,7 @@ static void _birth(void)
     py_birth_obj_aux(TV_SWORD, SV_TWO_HANDED_SWORD, 1);
     py_birth_obj_aux(TV_HARD_ARMOR, SV_CHAIN_MAIL, 1);
     py_birth_obj_aux(TV_BOOTS, SV_PAIR_OF_METAL_SHOD_BOOTS, 1);
+    py_birth_starting_kit();
 }
 
 class_t *mauler_get_class(void)

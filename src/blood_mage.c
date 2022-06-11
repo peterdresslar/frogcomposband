@@ -81,6 +81,7 @@ static void _birth(void)
     py_birth_obj_aux(TV_SWORD, SV_DAGGER, 1);
     py_birth_obj_aux(TV_SOFT_ARMOR, SV_ROBE, 1);
     py_birth_spellbooks();
+    py_birth_starting_kit();
 }
 
 class_t *blood_mage_get_class(void)

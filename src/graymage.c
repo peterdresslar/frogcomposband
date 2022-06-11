@@ -273,6 +273,7 @@ static void _birth(void)
 
     object_prep(&forge, lookup_kind(TV_ARCANE_BOOK, 0));
     py_birth_obj(&forge);
+    py_birth_starting_kit();
 
     /* Restart? player_wipe doesn't know about this stuff, of course ... */
     for (i = 0; i < _MAX_SLOTS; i++)

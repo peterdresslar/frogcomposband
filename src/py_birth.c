@@ -59,6 +59,7 @@ extern void py_birth_obj_aux(int tval, int sval, int qty);
 extern void py_birth_food(void);
 extern void py_birth_light(void);
 extern void py_birth_spellbooks(void);
+extern void py_birth_starting_kit(void);
 
 /* I prefer to render menus to a document rather than directly to the terminal */
 static doc_ptr _doc = NULL;
@@ -196,6 +197,62 @@ void py_birth_spellbooks(void)
         py_birth_obj_aux(TV_LIFE_BOOK + p_ptr->realm1 - 1, 0, 1);
     if (p_ptr->realm2)
         py_birth_obj_aux(TV_LIFE_BOOK + p_ptr->realm2 - 1, 0, 1);
+}
+
+/* Starting Kit. Note it would be nice to integrate this into the birth process more completely. *
+ * With a budget that represents available gold (less about 50 AU in change,) subtly randomize *
+ * each tailored kit to the character. As of right now there are no big surprises, but could be */
+
+void py_birth_starting_kit() 
+{
+    printf("starting %hhu\n", starting_kit);
+
+    if (!starting_kit) return;
+
+    printf("not null\n");
+
+
+    // Otherwise, we have a kit. First set the budget. (Check gold? Worry about wealthy chars? Would be better)
+    int budget = p_ptr->au;
+    printf("budget %d\n", budget);
+    switch(starting_kit)
+    {
+    case 1:
+        printf("case 1\n");
+
+        // CLW or Elvish?
+        switch(randint1(2)) 
+        {
+            case 1: /*CLW*/ py_birth_obj_aux(TV_POTION, SV_POTION_CURE_LIGHT, 1 + rand_range(0, 3)); break;
+            case 2: /*Elvish*/ py_birth_obj_aux(TV_FOOD, SV_FOOD_WAYBREAD, 1 + rand_range(0, 1)); break;
+        }
+        py_birth_obj_aux(TV_POTION, SV_POTION_CURE_SERIOUS, 1 + rand_range(0, 1));
+        py_birth_obj_aux(TV_POTION, SV_POTION_CURING, 1 + rand_range(0, 1));
+        // Phase or Tele?
+        switch(randint1(2)) 
+        {
+            case 1: py_birth_obj_aux(TV_SCROLL, SV_SCROLL_PHASE_DOOR, 2 + rand_range(0, 1)); break;
+            case 2: py_birth_obj_aux(TV_SCROLL, SV_SCROLL_TELEPORT, 1 + rand_range(0, 1)); break;
+        }
+        break;
+    }
+
+    //* HEALTH
+    // 3-4 !CLW OR Elvish Waybread, 1-2 !CSW, Curing, ?Phasedoor or ?Tele
+
+    // MOVEMENT
+    // 5-6 ?Phasedoor, 1-3 ?Tele, 1 ?Recall, 1 !Speed
+
+    // LIGHT
+    // Brass Lantern, FlaskOil 2-3 ?Light, !Curing, 2-3 ?Phasedoor,  
+
+    // HARD
+    // 10 !booze? Spikes? Useful stuff?    
+
+    //don't forget to remove gold to account for starting kit cost
+
+    // NONE 
+    // do nothing (?) */
 }
 
 /********************************************************************
@@ -1870,11 +1927,11 @@ static int _speed_ui(void)
 }
 
 cptr _starting_kit_text[STARTING_KIT_MAX] = {
+ "None",
  "Healthy Living",
  "Mobility Version",
  "Vision Plan",
- "Hard Times",
- "None"
+ "Hard Times"
 };
 
 static int _starting_kit_ui(void)
@@ -1913,6 +1970,7 @@ static int _starting_kit_ui(void)
             i = A2I(cmd);
             if (0 <= i && i < STARTING_KIT_MAX)
             {
+                printf("setting %d/n", cmd);
                 starting_kit = i;
                 return UI_OK;
             }
@@ -2927,8 +2985,11 @@ static void _name_line(doc_ptr doc)
     int _attr = (coffee_break) ? TERM_VIOLET : TERM_VIOLET;
     doc_printf(doc, "Name : <color:B>%-32s</color>", player_name);
     if (coffee_break >= GAME_SPEED_MAX) coffee_break = 0; /* paranoia */
+    if (starting_kit >= STARTING_KIT_MAX) starting_kit = 0; /* paranoia rules! */
     doc_printf(doc, "<color:o>Game Speed:</color> ");
     doc_printf(doc, "<color:%c>%s</color>\n", attr_to_attr_char(_attr), _game_speed_text[coffee_break]);
+    doc_printf(doc, "<color:y>Starting Kit:</color> ");
+    doc_printf(doc, "<color:%c>%s</color>\n", attr_to_attr_char(_attr), _starting_kit_text[starting_kit]);
 }
 
 static void _sex_line(doc_ptr doc)

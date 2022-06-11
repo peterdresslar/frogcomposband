@@ -2507,11 +2507,11 @@ static cptr _game_speed_text[GAME_SPEED_MAX] = {
 };
 
 static cptr _starting_kit_text[STARTING_KIT_MAX] = {
+    "None",
     "Healthy Living",
     "Mobility Version",
     "Vision Plan",
-    "Hard Times",
-    "<color:r>No Kit, I'll Keep My Gold</color>"
+    "Hard Times"
 };
 
 static void _build_options(doc_ptr doc)

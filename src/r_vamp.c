@@ -81,6 +81,7 @@ static void _birth(void)
     forge.name2 = EGO_RING_COMBAT;
     forge.to_d = 4;
     py_birth_obj(&forge);
+    py_birth_starting_kit();
 }
 
 static void _gain_level(int new_level) 

@@ -53,6 +53,7 @@ static void _birth(void)
 
     py_birth_obj_aux(TV_STAFF, EFFECT_NOTHING, 1);
     py_birth_light();
+    py_birth_starting_kit();
 }
 
 static int _attack_level(void)

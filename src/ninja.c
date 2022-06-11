@@ -591,6 +591,7 @@ static void _birth(void)
     py_birth_obj_aux(TV_SOFT_ARMOR, SV_SOFT_LEATHER_ARMOR, 1);
     py_birth_obj_aux(TV_POTION, SV_POTION_SPEED, 1);
     py_birth_obj_aux(TV_SPIKE, 0, rand_range(15, 20));
+    py_birth_starting_kit();
 }
 
 class_t *ninja_get_class(void)

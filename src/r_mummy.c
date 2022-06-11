@@ -892,6 +892,7 @@ static void _birth(void)
     object_prep(&forge, lookup_kind(TV_SOFT_ARMOR, SV_ROBE));
     py_birth_obj(&forge);
     py_birth_obj_aux(TV_STAFF, EFFECT_NOTHING, 1);
+    py_birth_starting_kit();
 }
 
 /**********************************************************************

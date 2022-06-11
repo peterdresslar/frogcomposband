@@ -59,6 +59,7 @@ static void _birth(void)
     py_birth_obj_aux(TV_SWORD, SV_SHORT_SWORD, 1);
     py_birth_obj_aux(TV_SOFT_ARMOR, SV_HARD_LEATHER_ARMOR, 1);
     py_birth_obj_aux(TV_ARCANE_BOOK, 0, 1);
+    py_birth_starting_kit();
 }
 
 class_t *red_mage_get_class(void)

@@ -45,6 +45,7 @@ static void _birth(void)
     py_birth_obj_aux(TV_BOW, SV_SHORT_BOW, 1);
     py_birth_obj_aux(TV_ARROW, SV_ARROW, rand_range(20, 40));
     py_birth_spellbooks();
+    py_birth_starting_kit();
 }
 
 class_t *ranger_get_class(void)

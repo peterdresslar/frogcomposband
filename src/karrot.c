@@ -960,6 +960,7 @@ static void _birth(void)
     disciple_birth();
     py_birth_obj_aux(TV_SWORD, SV_CUTLASS, 1);
     py_birth_obj_aux(TV_HARD_ARMOR, SV_CHAIN_MAIL, 1);
+    py_birth_starting_kit();
     _karrot_ini_quests();
 }
 

@@ -710,6 +710,7 @@ static void _birth(void)
     py_birth_obj_aux(TV_POTION, SV_POTION_HEROISM, randint1(5));
     py_birth_obj_aux(TV_SOFT_ARMOR, SV_SOFT_LEATHER_ARMOR, 1);
     py_birth_spellbooks();
+    py_birth_starting_kit();
 }
 
 class_t *monk_get_class(void)

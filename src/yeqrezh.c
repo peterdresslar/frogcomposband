@@ -1647,6 +1647,7 @@ static void _birth(void)
     disciple_birth();
     py_birth_obj_aux(TV_SWORD, SV_SHORT_SWORD, 1);
     py_birth_obj_aux(TV_SOFT_ARMOR, SV_HARD_STUDDED_LEATHER, 1);
+    py_birth_starting_kit();
     _yeqrezh_ini_picks();
 }
 

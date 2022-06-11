@@ -961,6 +961,7 @@ static void _birth(void)
 
     py_birth_food();
     py_birth_light();
+    py_birth_starting_kit();
     _igor_birth_hack = TRUE;
     for (i = 0; i < _IB_MAX_ACTIVE; i++)
     {

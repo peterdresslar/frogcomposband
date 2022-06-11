@@ -103,6 +103,8 @@ static void _birth(void)
     py_birth_obj_aux(TV_BOW, SV_SLING, 1);
     py_birth_obj_aux(TV_SHOT, SV_PEBBLE, rand_range(20, 40));
     p_ptr->au += 2000;
+    /*kit must come after tourism au bonus */
+    py_birth_starting_kit();
     _ini_photo_list();
 }
 

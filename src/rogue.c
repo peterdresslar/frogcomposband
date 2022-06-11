@@ -775,8 +775,8 @@ static void _birth(void)
     py_birth_obj_aux(TV_SOFT_ARMOR, SV_SOFT_LEATHER_ARMOR, 1);
     py_birth_obj_aux(TV_SCROLL, SV_SCROLL_TELEPORT, randint1(3));
     py_birth_spellbooks();
-
     p_ptr->au += 200;
+    py_birth_starting_kit();
 }
 
 /****************************************************************************

@@ -1292,6 +1292,7 @@ static void _birth(void)
     py_birth_obj_aux(TV_SWORD, SV_KATANA, 1);
     py_birth_obj_aux(TV_HARD_ARMOR, SV_CHAIN_MAIL, 1);
     py_birth_spellbooks();
+    py_birth_starting_kit();
 }
 
 class_t *samurai_get_class(void)

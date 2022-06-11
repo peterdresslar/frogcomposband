@@ -31,6 +31,7 @@ static void _birth(void)
     py_birth_obj(&forge);
 
     py_birth_light();
+    py_birth_starting_kit();
 }
 
 /**********************************************************************

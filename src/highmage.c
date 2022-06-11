@@ -59,6 +59,7 @@ static void _birth(void)
     py_birth_obj_aux(TV_POTION, SV_POTION_CLARITY, rand_range(10, 20));
     py_birth_obj_aux(TV_WAND, EFFECT_BOLT_MISSILE, 1);
     py_birth_spellbooks();
+    py_birth_starting_kit();
 }
 
 class_t *high_mage_get_class(void)

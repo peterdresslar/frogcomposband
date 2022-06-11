@@ -276,6 +276,7 @@ static void _artemis_birth(void)
     py_birth_obj_aux(TV_ARROW, SV_ARROW, rand_range(15, 20));
     py_birth_food();
     py_birth_light();
+    py_birth_starting_kit();
 }
 
 /****************************************************************
@@ -383,6 +384,7 @@ static void _poseidon_birth(void)
     skills_weapon_init(TV_POLEARM, SV_TRIDENT, WEAPON_EXP_BEGINNER);
     py_birth_food();
     py_birth_light();
+    py_birth_starting_kit();
 }
 
 static void _poseidon_calc_bonuses(void)

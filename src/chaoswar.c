@@ -749,6 +749,7 @@ static void _birth(void)
     py_birth_obj_aux(TV_SWORD, SV_BROAD_SWORD, 1);
     py_birth_obj_aux(TV_HARD_ARMOR, SV_METAL_SCALE_MAIL, 1);
     py_birth_spellbooks();
+    py_birth_starting_kit();
 }
 
 class_t *chaos_warrior_get_class(void)

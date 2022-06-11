@@ -234,6 +234,7 @@ static void _birth(void)
     py_birth_obj_aux(TV_SWORD, SV_BROAD_SWORD, 1);
     py_birth_obj_aux(TV_HARD_ARMOR, SV_CHAIN_MAIL, 1);
     py_birth_obj_aux(TV_POTION, SV_POTION_CONFUSION, 2);
+    py_birth_starting_kit();
     _troika_ini_quests();
     _troika_ini_spells();
     troika_wipe_timeouts();

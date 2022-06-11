@@ -17,6 +17,8 @@ void disciple_birth(void)
     mut_lose(MUT_CHAOS_GIFT);
     mut_gain(MUT_PURPLE_GIFT);
     mut_lock(MUT_PURPLE_GIFT);
+    /* Should they get a kit? */
+    py_birth_starting_kit();
 }
 
 /* Basically, this is the level the player would be if he were a Dunadan */

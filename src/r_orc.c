@@ -74,6 +74,7 @@ static void _fighter_birth(void)
     py_birth_obj(&forge);
 
     py_birth_light();
+    py_birth_starting_kit();
 
     p_ptr->current_r_idx = MON_SNAGA;
 }
@@ -191,6 +192,7 @@ static void _shaman_birth(void)
     py_birth_obj(&forge);
 
     py_birth_light();
+    py_birth_starting_kit();
 
     p_ptr->current_r_idx = MON_ORC_SHAMAN;
 }

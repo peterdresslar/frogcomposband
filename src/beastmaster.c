@@ -31,6 +31,7 @@ static void _birth(void)
     py_birth_obj_aux(TV_POLEARM, SV_SPEAR, 1);
     py_birth_obj_aux(TV_SOFT_ARMOR, SV_SOFT_LEATHER_ARMOR, 1);
     py_birth_spellbooks();
+    py_birth_starting_kit();
 }
 
 class_t *beastmaster_get_class(void)

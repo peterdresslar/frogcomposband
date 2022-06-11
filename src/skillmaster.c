@@ -1538,6 +1538,7 @@ static void _birth(void)
 {
     _reset_groups();
     p_ptr->au += 500; /* build your own class, so buy your own gear! */
+    /* intentionally leaving out starting kit (need to document) */
 }
 
 static void _gain_level(int new_lvl)

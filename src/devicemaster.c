@@ -440,6 +440,7 @@ static void _birth(void)
     py_birth_obj_aux(TV_SOFT_ARMOR, SV_SOFT_LEATHER_ARMOR, 1);
     py_birth_obj_aux(TV_SWORD, SV_SHORT_SWORD, 1);
     py_birth_obj_aux(TV_WAND, EFFECT_BOLT_MISSILE, 1);
+    py_birth_starting_kit();
 }
 
 static void _character_dump(doc_ptr doc)
